@@ -82,15 +82,25 @@ data:
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: kube-flannel-ds-amd64
+  name: fluenttd
   namespace: kube-system
   labels:
+    k8-app: fluentd-logging
+    version: v1
+    kubernetes.io/cluster-service: "true"
     tier: node
     app: flannel
+    
 spec:
+  selector:
+    matchLabels:
+      k8s-app: fluentd-logging
   template:
     metadata:
       labels:
+        k8s-app: fluentd-logging
+        version: v1
+        kubernetes.io/cluster-service: "true"
         tier: node
         app: flannel
     spec:
@@ -160,15 +170,24 @@ spec:
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: kube-flannel-ds-arm64
+  name: fluentd
   namespace: kube-system
   labels:
+    k8s-app: fluentd-logging
+    version: v1
+    kubernetes.io/cluster-service: "true"
     tier: node
     app: flannel
 spec:
+  selector:
+    matchLabels:
+      k8s-app: fluentd-logging
   template:
     metadata:
       labels:
+        k8s-app: fluentd-logging
+        version: v1
+        kubernetes.io/cluster-service: "true"
         tier: node
         app: flannel
     spec:
